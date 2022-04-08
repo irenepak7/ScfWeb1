@@ -1,0 +1,33 @@
+name: Tencent Tcr Image
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  TCR_IMAGE_URL: deccr.ccs.tencentyun.com/kamino/actions
+  TCR_IMAGE_TAG: debug
+
+jobs:
+  build-image-and-push-to-tcr:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${TCR_IMAGE_URL}:${TCR_IMAGE_TAG} .
+
+      - name: Login Tcr
+        run: |
+          docker login -u ${{ secrets.TENCENT_CLOUD_ACCOUNT_ID }} -p '${{ secrets.TENCENT_TCR_PASSWORD }}' ${TCR_IMAGE_URL}
+
+      - name: Push Image To Tcr
+        run: |
+          docker push ${TCR_IMAGE_URL}
+
+
