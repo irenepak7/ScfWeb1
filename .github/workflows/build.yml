@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  TCR_IMAGE_URL: deccr.ccs.tencentyun.com/kamino/actions
-  TCR_IMAGE_TAG: debug
+  TCR_IMAGE_URL: ${{ secrets.TCR_IMAGE_URL }}
+  TCR_IMAGE_TAG: ${{ secrets.TCR_IMAGE_TAG }}
 
 jobs:
   build:
