@@ -28,6 +28,6 @@ jobs:
 
       - name: Push Image To Tcr
         run: |
-          docker push ${TCR_IMAGE_URL}
+          docker push ${TCR_IMAGE_URL}:${TCR_IMAGE_TAG}
 
 
