@@ -24,4 +24,6 @@ RUN apt autoremove -y build-essential libssl-dev libpcre3-dev zlib1g-dev &&\
     rm -rf /var/lib/apt/lists/* &&\
     rm /root/build -r
 
-ENTRYPOINT ["/tmp/openresty/nginx/sbin/nginx","-g","daemon off;"]
+ADD nginx.conf /tmp/openresty/nginx/conf/nginx.conf
+
+ENTRYPOINT ["/usr/local/openresty/nginx/sbin/nginx"]
