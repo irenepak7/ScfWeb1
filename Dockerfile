@@ -4,9 +4,6 @@ EXPOSE 9000
 WORKDIR /root
 
 RUN mkdir -p /root/build &&\
-    cp /etc/apt/sources.list /etc/apt/sources.list.backup &&\ 
-    sed -i s/deb.debian.org/mirrors.cloud.tencent.com/g /etc/apt/sources.list &&\
-    sed -i s/security.debian.org/mirrors.cloud.tencent.com/g /etc/apt/sources.list &&\
     apt update &&\
     apt install -y build-essential wget git libssl-dev libpcre3-dev zlib1g-dev ffmpeg python3 python3-pip
 
