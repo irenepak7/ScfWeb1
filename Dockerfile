@@ -32,4 +32,5 @@ COPY default /etc/nginx/sites-enabled/default
 # RUN /usr/sbin/nginx -t &&\
 #    sleep 10
 
-CMD service nginx start
+# CMD service nginx start
+CMD ["nginx", "-g", "daemon off;"]
