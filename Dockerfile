@@ -2,8 +2,10 @@ FROM buildpack-deps:bullseye
 
 LABEL maintainer="Sebastian Ramirez <tiangolo@gmail.com>"
 
-RUN apt-get update && \
-    apt install libnginx-mod-rtmp ufw curl
+RUN apt-get update &&\
+    apt-get install -y libnginx-mod-rtmp &&\
+    apt-get install -y ufw &&\
+    apt-get install -y curl
 
 COPY nginx.conf /etc/nginx/nginx.conf
 # COPY default /etc/nginx/sites-enabled/default
