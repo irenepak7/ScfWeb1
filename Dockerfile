@@ -8,7 +8,7 @@ ENV NGINX_RTMP_MODULE_VERSION 1.2.2
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y ca-certificates openssl libssl-dev ufw && \
+    apt-get install -y ca-certificates openssl libssl-dev firewalld && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and decompress Nginx
@@ -49,7 +49,13 @@ RUN cd /tmp/build/nginx/${NGINX_VERSION} && \
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
 
-RUN ufw allow 1935/tcp
+# RUN ufw allow 1935/tcp
+RUN service firewalld start
+RUN firewall-cmd --zone=public --add-port=1935/tcp --permanent
+RUN firewall-cmd --reload
+RUN firewall-cmd --list-ports | grep 1935
+RUN sleep 10
+
 # Set up config file
 COPY nginx.conf /etc/nginx/nginx.conf
 
