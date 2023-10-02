@@ -57,11 +57,9 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
 
 COPY . .
 RUN chmod +x test1.sh
-RUN ./test1.sh
-RUN sleep 10
-
 # Set up config file
 COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 1935
-CMD ["nginx", "-g", "daemon off;"]
+CMD ./test1.sh
+
