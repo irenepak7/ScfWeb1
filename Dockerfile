@@ -1,5 +1,5 @@
 FROM debian:11 
-EXPOSE 9000
+EXPOSE 1935
 
 WORKDIR /root
 
