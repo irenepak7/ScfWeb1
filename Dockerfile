@@ -29,7 +29,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY default /etc/nginx/sites-enabled/default
 
-RUN nginx -t &&\
+RUN /usr/sbin/nginx -t &&\
     sleep 10
 
 CMD service nginx start
