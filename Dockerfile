@@ -9,6 +9,7 @@ RUN apt-get update &&\
 
 COPY nginx.conf /etc/nginx/nginx.conf
 # COPY default /etc/nginx/sites-enabled/default
-RUN ufw allow 1935/tcp && service nginx restart
+RUN ufw allow 1935/tcp 
+# RUN service nginx restart
 EXPOSE 1935
 CMD ["nginx", "-g", "daemon off;"]
