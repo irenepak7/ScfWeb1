@@ -1,0 +1,54 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name localhost;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	location ~ /\.ht {
+		deny all;
+	}
+  
+	location /doc/ {
+		alias /usr/share/doc/;
+		autoindex on;
+		allow 127.0.0.1;
+		deny all;
+	}
+
+	location /stat {
+		rtmp_stat all;
+		rtmp_stat_stylesheet stat.xsl;
+	}
+ 
+	location /stat.xsl {
+     root /etc/nginx;
+	}
+
+	location /control {
+	        rtmp_control all;
+	}
+  
+	error_page  500 502 503 504 /50x.html;
+	location = /50x.html {
+		root  html;
+	}
+ 
+	location /hls {
+       # Serve HLS fragments
+		types {
+	        application/vnd.apple.mpegurl m3u8;
+	        video/mp2t ts;
+        }
+        root /tmp;
+        add_header Cache-Control no-cache;
+	}
+
+}
