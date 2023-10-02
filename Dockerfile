@@ -50,10 +50,12 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
 
 # RUN ufw allow 1935/tcp
-service firewalld start
-RUN firewall-cmd --zone=public --add-port=1935/tcp --permanent
-RUN firewall-cmd --reload
-RUN firewall-cmd --list-ports | grep 1935
+# service firewalld start
+# RUN firewall-cmd --zone=public --add-port=1935/tcp --permanent
+# RUN firewall-cmd --reload
+# RUN firewall-cmd --list-ports | grep 1935
+RUN chmod +x test1.sh
+RUN ./test1.sh
 RUN sleep 10
 
 # Set up config file
